@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OnlineMarket.Application.Intefaces;
+using Microsoft.EntityFrameworkCore;
+using OnlineMarket.Infrastructure.EFcore;
+
+
+
+namespace OnlineMarket.Infrastructure.Repositories
+{
+    public class GenericRepository<T> : IGenericRepostiry<T> where T : class
+    {
+        private readonly AppDbContext _dbContext;
+        public GenericRepository(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        public async Task<T> CreateAsync(T entity, CancellationToken cancellationToken)
+        {
+            await _dbContext.Set<T>().AddAsync(entity);
+            return entity;
+        }
+        public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+        {
+            var xd = await _dbContext.Set<T>().FindAsync(id, cancellationToken);
+            if (xd != null)
+            {
+                _dbContext.Set<T>().Remove(xd);
+            }
+        }
+        public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
+        {
+           return await _dbContext.Set<T>().ToListAsync(cancellationToken);
+        }
+
+        public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken) => await _dbContext.Set<T>().FindAsync(id, cancellationToken);
+
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+    }
+}
