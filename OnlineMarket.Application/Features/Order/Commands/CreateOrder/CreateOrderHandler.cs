@@ -20,11 +20,6 @@ namespace OnlineMarket.Application.Features.Order.Commands.CreateOrder
         public async Task<Orders?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var order =new Orders(request.Name, request.Price, request.Product);
-            if (order == null)
-            {
-                order.NotCreated();
-                throw new Exception("заказ не создан");
-            }
             order.Created();
             await _orderRepository.CreateAsync(order, cancellationToken);
             await _orderRepository.SaveChangesAsync(cancellationToken);

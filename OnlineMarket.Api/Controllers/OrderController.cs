@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
-using OnlineMarket.Application.Features.Order.Queries.GetOrderById;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using OnlineMarket.Application.DTOs.OrderDTOs;
+using OnlineMarket.Application.Features.Order.Commands.CreateOrder;
 using OnlineMarket.Application.Features.Order.Commands.DeleteOrder;
+using OnlineMarket.Application.Features.Order.Queries.GetAllOrders;
+using OnlineMarket.Application.Features.Order.Queries.GetOrderById;
 using OnlineMarket.Domain.Entity;
 using System.Threading.Tasks;
-using OnlineMarket.Application.Features.Order.Queries.GetAllOrders;
-using OnlineMarket.Application.DTOs.OrderDTOs;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -48,9 +49,9 @@ namespace OnlineMarket.Api.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] OrderDto request)
+        public async Task<ActionResult> Create([FromBody] OrderCreateDto request)
         {
-            var order= await _mediatr.Send(request);
+            var order= await _mediatr.Send(new CreateOrderCommand(request.Name, request.Price, request.Product));
             return Ok(order);
         }
 

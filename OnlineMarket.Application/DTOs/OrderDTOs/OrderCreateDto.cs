@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace OnlineMarket.Application.DTOs.OrderDTOs
 {
-    public record OrderCreateDto(string Name, int Product);
+    public record OrderCreateDto(string Name,decimal Price, int Product);
 }

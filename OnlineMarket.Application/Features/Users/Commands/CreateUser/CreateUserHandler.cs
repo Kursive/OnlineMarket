@@ -22,7 +22,6 @@ namespace OnlineMarket.Application.Features.Users.Commands.CreateUser
             var user = new User(request.Name, request.Email, request.Password);
             if (user == null)
             {
-                user.NotCreated();
                 throw new ArgumentNullException("Пользователь не создан");
             }
             user.Created();

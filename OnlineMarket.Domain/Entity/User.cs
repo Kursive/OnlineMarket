@@ -18,9 +18,9 @@ namespace OnlineMarket.Domain.Entity
             get => _email; 
             set 
             {
-               if (!value.Contains("@") || !string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value) || !value.Contains("@"))
                     throw new ArgumentException("Ошибка почты");
-               _email = value;
+                _email = value;
             }
         }
         public string Password { get;private set; } = string.Empty;
@@ -35,14 +35,13 @@ namespace OnlineMarket.Domain.Entity
         public User() { }
         public void Created()
         {
-            if (Status == Status.Created)
+            if (Status != Status.Created)
                 Status = Status.Created;
         }
         public void NotCreated()
         {
-            if (Status == Status.NotCreated)
-                throw new ArgumentException("Пользователь не создан");
-            Status = Status.NotCreated;
+            if (Status != Status.NotCreated)
+                Status = Status.NotCreated;
         }
     }
 }

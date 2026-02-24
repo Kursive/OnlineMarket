@@ -8,5 +8,5 @@ using OnlineMarket.Domain.Enums;
 
 namespace OnlineMarket.Application.DTOs.OrderDTOs
 {
-    public sealed record OrderDto(string Name, Guid Id, decimal Price, Status Status, int Product);
+    public sealed record OrderDto(string Name, Guid Id, decimal Price, int Product);
 }

@@ -20,7 +20,7 @@ namespace OnlineMarket.Application.Features.Order.Queries.GetAllOrders
         public async Task<List<OrderDto>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
         {
             var orders = await _orderRepository.GetAllAsync(cancellationToken) ?? throw new ArgumentNullException("Ошибка получения всех заказов");
-            return orders.Select(order => new OrderDto(order.Name, order.Id, order.Price, order.Status, order.Product))
+            return orders.Select(order => new OrderDto(order.Name, order.Id, order.Price,  order.Product))
                 .ToList();
         }
     }

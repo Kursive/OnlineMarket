@@ -10,7 +10,7 @@ namespace OnlineMarket.Domain.Entity
     
     public class Orders
     {
-        public Guid Id { get; init; }
+        public Guid Id { get; init; } = Guid.NewGuid();
         private decimal _price;
         private int _product;
         public string Name { get; } = string.Empty;
@@ -45,14 +45,13 @@ namespace OnlineMarket.Domain.Entity
        public Orders() { }
         public void Created()
         {
-            if(Status == Status.Created)
+            if (Status != Status.Created)
                 Status = Status.Created;
         }
         public void NotCreated()
         {
-            if (Status == Status.NotCreated)
-                throw new ArgumentException("заказ не создан");
-            Status = Status.NotCreated;
+            if(Status != Status.NotCreated)
+        Status = Status.NotCreated;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace OnlineMarket.Application.Features.Order.Queries.GetOrderById
         public async Task <OrderDto> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
           var order = await _orderRepository.GetByIdAsync(request.Id, cancellationToken) ?? throw new Exception("Ошибка нахождения заказа по ID");
-          return new OrderDto(order.Name, order.Id, order.Price, order.Status, order.Product);  
+          return new OrderDto(order.Name, order.Id, order.Price,  order.Product);  
         }
     }
 }

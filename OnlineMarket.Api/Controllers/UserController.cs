@@ -5,7 +5,7 @@ using OnlineMarket.Application.Features.Users.Queries.GetUserById;
 using OnlineMarket.Domain.Entity;
 using OnlineMarket.Application.Features.Users.Queries.GetAllUsers;
 using OnlineMarket.Application.Features.Users.Commands.CreateUser;
-using OnlineMarket.Application.DTOs.UserDto;
+using OnlineMarket.Application.DTOs.UserDTOs;
 using OnlineMarket.Application.Features.Users.Commands.DeleteUser;
 
 namespace OnlineMarket.Api.Controllers
@@ -38,9 +38,9 @@ namespace OnlineMarket.Api.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] UserDto command)
+        public async Task<ActionResult> Create([FromBody] UserCreateDto request)
         {
-            var user = await _mediator.Send(command);
+            var user = await _mediator.Send(new CreateUserCommand(request.Name,request.Email,request.Password));
             return Ok(user);
         }
 
