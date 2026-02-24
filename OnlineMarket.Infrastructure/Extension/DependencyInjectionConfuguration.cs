@@ -11,12 +11,11 @@ namespace OnlineMarket.Infrastructure.Extension
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(
-                    configuration.GetConnectionString("Postgres")
-                )
-            );
+            services.AddDbContext<AppDbContext>(options => 
+            options.UseNpgsql(configuration.GetConnectionString("Postgres")));
+
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
     }

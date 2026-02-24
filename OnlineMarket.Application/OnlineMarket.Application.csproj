@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Features\Users\Queries\GetAllUsers\GetAllUserQuery.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="14.0.0" />
   </ItemGroup>
 

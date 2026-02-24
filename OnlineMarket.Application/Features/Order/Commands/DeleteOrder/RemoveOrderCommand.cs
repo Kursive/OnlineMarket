@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using OnlineMarket.Domain.Entity;
 
-namespace OnlineMarket.Application.Commands.DeleteOrder
+namespace OnlineMarket.Application.Features.Order.Commands.DeleteOrder
 {
-    public record DeleteOrderCommand(Guid Id):IRequest<Guid>;//мб лучше в  Query
+    public record RemoveOrderCommand(Guid Id) : IRequest<Unit>;
 }

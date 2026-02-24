@@ -10,7 +10,8 @@ namespace OnlineMarket.Infrastructure.EFcore
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Order> Orders {  get; set; }
+        public DbSet<Orders> Orders {  get; set; }
+        public DbSet<User> Users { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }

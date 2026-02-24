@@ -7,7 +7,7 @@ using OnlineMarket.Domain.Entity;
 
 namespace OnlineMarket.Application.Intefaces
 {
-    public interface  IOrderRepository:IGenericRepostiry<Order>
+    public interface  IOrderRepository : IGenericRepostiry<Orders>
     {
     }
 }

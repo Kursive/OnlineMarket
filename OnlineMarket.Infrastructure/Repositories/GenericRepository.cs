@@ -23,24 +23,17 @@ namespace OnlineMarket.Infrastructure.Repositories
             await _dbContext.Set<T>().AddAsync(entity);
             return entity;
         }
-        public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
-        {
-            var xd = await _dbContext.Set<T>().FindAsync(id, cancellationToken);
-            if (xd != null)
-            {
-                _dbContext.Set<T>().Remove(xd);
-            }
-        }
-        public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
-        {
-           return await _dbContext.Set<T>().ToListAsync(cancellationToken);
-        }
+        public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken) => await _dbContext.Set<T>().ToListAsync(cancellationToken);
 
         public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken) => await _dbContext.Set<T>().FindAsync(id, cancellationToken);
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+        public void Remove(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
         }
     }
 }

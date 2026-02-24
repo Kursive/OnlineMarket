@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using OnlineMarket.Application.DTOs;
+using OnlineMarket.Application.DTOs.OrderDTOs;
 using OnlineMarket.Application.Intefaces;
 using OnlineMarket.Domain.Entity;
 
-namespace OnlineMarket.Application.Queries.GetOrderById
+namespace OnlineMarket.Application.Features.Order.Queries.GetOrderById
 {
-    public class GetOrderByIdHandler : IRequestHandler<GetOrderByIdQuery, OrderDto>
+    public class GetOrderByIdHandler : IRequestHandler <GetOrderByIdQuery, OrderDto>
     {
         private readonly IOrderRepository _orderRepository;
 
@@ -18,13 +18,10 @@ namespace OnlineMarket.Application.Queries.GetOrderById
         {
             _orderRepository = orderRepository;
         }
-
         public async Task <OrderDto> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = await _orderRepository.GetByIdAsync(request.Id, cancellationToken);
-            return result == null
-                ? throw new Exception("Ошибка нахождения заказа по ID")
-                : new OrderDto(result.Name, result.Id, result.Price, result.Status, result.Product);
+          var order = await _orderRepository.GetByIdAsync(request.Id, cancellationToken) ?? throw new Exception("Ошибка нахождения заказа по ID");
+          return new OrderDto(order.Name, order.Id, order.Price, order.Status, order.Product);  
         }
     }
 }

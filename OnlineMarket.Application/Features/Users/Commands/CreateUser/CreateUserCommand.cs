@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using OnlineMarket.Domain.Entity;
 
-namespace OnlineMarket.Application.Commands.CreateOrder
+namespace OnlineMarket.Application.Features.Users.Commands.CreateUser
 {
-    public record CreateOrderCommand(string Name, decimal Price, int Product) :IRequest<Order>;
+    public record CreateUserCommand(string Name, string Email, string Password) : IRequest<User>;
 }

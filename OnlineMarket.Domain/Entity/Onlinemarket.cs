@@ -8,10 +8,10 @@ namespace OnlineMarket.Domain.Entity
 {
     public class Onlinemarket
     {
-       
-        private readonly List<Order> _orders = new List<Order>();
+        public Guid Id { get; init; }
+        private readonly List<Orders> _orders = new List<Orders>();
         private readonly List<User> _users = new List<User>();
-        public IReadOnlyCollection<Order> Orders => _orders;
+        public IReadOnlyCollection<Orders> Orders => _orders;
         public IReadOnlyCollection<User> Users => _users;
         public Onlinemarket() { }
     }

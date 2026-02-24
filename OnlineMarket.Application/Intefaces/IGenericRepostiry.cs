@@ -12,7 +12,7 @@ namespace OnlineMarket.Application.Intefaces
         Task<T> CreateAsync(T entity, CancellationToken cancellationToken);
         Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
         Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
-        Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+        void Remove(T entity);
         Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

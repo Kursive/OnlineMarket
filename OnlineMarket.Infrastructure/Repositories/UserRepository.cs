@@ -1,18 +1,19 @@
 ﻿using OnlineMarket.Application.Intefaces;
-using OnlineMarket.Domain.Entity;
-using OnlineMarket.Infrastructure.EFcore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OnlineMarket.Domain.Entity;
+using OnlineMarket.Infrastructure.EFcore;
+
 
 namespace OnlineMarket.Infrastructure.Repositories
 {
-     public class OrderRepository : GenericRepository<Orders> , IOrderRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
         private readonly AppDbContext _dbContext;
-        public OrderRepository(AppDbContext dbContext) : base(dbContext)  
+        public UserRepository(AppDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
