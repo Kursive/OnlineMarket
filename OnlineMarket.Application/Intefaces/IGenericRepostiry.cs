@@ -14,5 +14,6 @@ namespace OnlineMarket.Application.Intefaces
         Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
         void Remove(T entity);
         Task SaveChangesAsync(CancellationToken cancellationToken);
+        Task<T> UpdateAsync(T entity, CancellationToken cancellationToken);
     }
 }

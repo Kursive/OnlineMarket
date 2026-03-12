@@ -13,7 +13,7 @@ namespace OnlineMarket.Domain.Entity
         public Guid Id { get; init; } = Guid.NewGuid();
         private decimal _price;
         private int _product;
-        public string Name { get; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
         public Status Status { get; private set; }
         public int Product
         {   

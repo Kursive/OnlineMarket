@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.Extensions.Caching.Memory;
 using OnlineMarket.Api.Validators;
 using OnlineMarket.Application.Features.Order.Commands.CreateOrder;
 using OnlineMarket.Infrastructure.Extension;
@@ -14,6 +15,20 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateOrderHandler).Assembly));
+
+//builder.Services.AddMemoryCache(options => // кэширование 
+//{
+//    options.SizeLimit = 1000; 
+//});
+//var options = new MemoryCacheEntryOptions()
+//    .SetSize(1);
+
+//builder.Services.AddStackExchangeRedisCache(options =>
+//{
+//    options.Configuration = "redis-10867.c304.europe-west1-2.gce.cloud.redislabs.com:10867,password=UQibp3eS6KEPxqZamqRB0R7LmGZExTqG";
+//    options.InstanceName = "OnlineMarket_";
+//});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -35,5 +35,11 @@ namespace OnlineMarket.Infrastructure.Repositories
         {
             _dbContext.Set<T>().Remove(entity);
         }
+        public async Task<T?> UpdateAsync(T enity, CancellationToken cancellation)
+        {
+          _dbContext.Set<T>().Update(enity);
+            await _dbContext.SaveChangesAsync(cancellation);
+            return enity;
+        }
     }
 }

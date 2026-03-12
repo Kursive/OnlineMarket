@@ -7,6 +7,8 @@ using OnlineMarket.Application.Features.Users.Queries.GetAllUsers;
 using OnlineMarket.Application.Features.Users.Commands.CreateUser;
 using OnlineMarket.Application.DTOs.UserDTOs;
 using OnlineMarket.Application.Features.Users.Commands.DeleteUser;
+using OnlineMarket.Application.Features.Users.Commands.UpdateUser;
+using OnlineMarket.Application.DTOs.UserDto;
 
 namespace OnlineMarket.Api.Controllers
 {
@@ -16,15 +18,15 @@ namespace OnlineMarket.Api.Controllers
     {
         private readonly IMediator _mediator;
 
-       public UserController(IMediator mediator)
-       {
+        public UserController(IMediator mediator)
+        {
             _mediator = mediator;
-       }
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(Guid id)
         {
-            var user= await _mediator.Send(new GetUserByIdQuery(id));
+            var user = await _mediator.Send(new GetUserByIdQuery(id));
             return Ok(user);
         }
 
@@ -32,7 +34,7 @@ namespace OnlineMarket.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAll()
         {
-            var users= await _mediator.Send(new GetAllUserQuery());
+            var users = await _mediator.Send(new GetAllUserQuery());
             return Ok(users);
         }
 
@@ -40,16 +42,28 @@ namespace OnlineMarket.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] UserCreateDto request)
         {
-            var user = await _mediator.Send(new CreateUserCommand(request.Name,request.Email,request.Password));
+            var user = await _mediator.Send(new CreateUserCommand(request.Name, request.Email, request.Password));
             return Ok(user);
         }
 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id )
+        public async Task<ActionResult> Delete(Guid id)
         {
             var user = await _mediator.Send(new RemoveUserCommand(id));
-            return NoContent();
+            return Ok("Пользователь удален");
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update([FromBody] UserCreateDto request, [FromRoute] Guid Id )
+        {
+            var user = await _mediator.Send(new UpdateUserCommand(Id,request.Name,request.Email,request.Password));
+            if(user == null)
+            {
+              return  NoContent();
+            }
+            return Ok(user);
         }
     }
 }
