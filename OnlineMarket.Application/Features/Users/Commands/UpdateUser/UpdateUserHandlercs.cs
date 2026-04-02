@@ -26,7 +26,7 @@ namespace OnlineMarket.Application.Features.Users.Commands.UpdateUser
             {
                 throw new Exception("Ошибка пользователя");
             }
-            user = new User(request.Name, request.Email, request.Password);
+            user.Update(request.Email,request.Name,request.Password);
             await _userRepository.UpdateAsync(user, cancellationToken);
             await _userRepository.SaveChangesAsync(cancellationToken);
             return user;

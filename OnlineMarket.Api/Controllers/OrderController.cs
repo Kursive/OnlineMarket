@@ -17,10 +17,12 @@ namespace OnlineMarket.Api.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        private readonly ILogger<OrderController> _logger;
         private readonly IMediator _mediatr;
-        public OrderController(IMediator mediatr)
+        public OrderController(IMediator mediatr,ILogger<OrderController> logger)
         {
             _mediatr = mediatr;
+            _logger = logger;
         }
 
 
@@ -28,6 +30,7 @@ namespace OnlineMarket.Api.Controllers
         public async Task<ActionResult> GetByid(Guid id)
         {
             var order = await _mediatr.Send(new GetOrderByIdQuery(id));
+            _logger.LogInformation("Закаказ с таким {id} найден", id);
             return Ok(order);
         }
 
@@ -36,6 +39,7 @@ namespace OnlineMarket.Api.Controllers
         public async Task<ActionResult<List<Orders>>> GetAll()
         {
             var orders = await _mediatr.Send(new GetAllOrdersQuery());
+            _logger.LogInformation("Все заказы получены");
             return Ok(orders);
         }
 
@@ -44,6 +48,7 @@ namespace OnlineMarket.Api.Controllers
         public async Task<ActionResult> DeleteOrder(Guid id)
         {
             var order = await _mediatr.Send(new RemoveOrderCommand(id));
+            _logger.LogInformation("заказ удален");
             return NoContent();
         }
 
@@ -52,6 +57,7 @@ namespace OnlineMarket.Api.Controllers
         public async Task<ActionResult> Create([FromBody] OrderCreateDto request)
         {
             var order= await _mediatr.Send(new CreateOrderCommand(request.Name, request.Price, request.Product));
+            _logger.LogInformation("Заказ добавлен");
             return Ok(order);
         }
 

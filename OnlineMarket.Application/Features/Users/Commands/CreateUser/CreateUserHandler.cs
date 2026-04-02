@@ -24,7 +24,6 @@ namespace OnlineMarket.Application.Features.Users.Commands.CreateUser
             {
                 throw new ArgumentNullException("Пользователь не создан");
             }
-            user.Created();
             await _userRepository.CreateAsync(user, cancellationToken);
             await _userRepository.SaveChangesAsync(cancellationToken);
             return user;

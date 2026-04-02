@@ -43,5 +43,11 @@ namespace OnlineMarket.Domain.Entity
             if (Status != Status.NotCreated)
                 Status = Status.NotCreated;
         }
+        public void Update(string email,string name,string password)
+        {
+            Email = email;
+            Name = name;
+            Password = password;
+        }
     }
 }

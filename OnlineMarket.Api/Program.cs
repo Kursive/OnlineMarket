@@ -16,18 +16,18 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateOrderHandler).Assembly));
 
-//builder.Services.AddMemoryCache(options => // кэширование 
-//{
-//    options.SizeLimit = 1000; 
-//});
-//var options = new MemoryCacheEntryOptions()
-//    .SetSize(1);
+builder.Services.AddMemoryCache(options => // кэширование 
+{
+    options.SizeLimit = 1000;
+});
+var options = new MemoryCacheEntryOptions()
+    .SetSize(1);
 
-//builder.Services.AddStackExchangeRedisCache(options =>
-//{
-//    options.Configuration = "redis-10867.c304.europe-west1-2.gce.cloud.redislabs.com:10867,password=UQibp3eS6KEPxqZamqRB0R7LmGZExTqG";
-//    options.InstanceName = "OnlineMarket_";
-//});
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "127.0.0.1:6379";
+    options.InstanceName = "OnlineMarket_";
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineMarket.Application.Intefaces;
+using OnlineMarket.Infrastructure.Cache;
 using OnlineMarket.Infrastructure.EFcore;
 using OnlineMarket.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace OnlineMarket.Infrastructure.Extension
 {
@@ -16,6 +17,8 @@ namespace OnlineMarket.Infrastructure.Extension
 
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<UsersCache>();
+
             return services;
         }
     }
