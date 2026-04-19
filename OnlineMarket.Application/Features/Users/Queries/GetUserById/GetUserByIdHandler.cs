@@ -18,7 +18,7 @@ namespace OnlineMarket.Application.Features.Users.Queries.GetUserById
         }
         public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var user=await _userRepository.GetByIdAsync(request.Id, cancellationToken) ?? throw new Exception($"Ошибка получения пользователя с {request.Id}");
+            var user = await _userRepository.GetByIdAsync(request.Id, cancellationToken) ?? throw new Exception($"Ошибка получения пользователя с {request.Id}");
             return new UserDto(user.Id, user.Name, user.Email,user.Password);
         }
     }

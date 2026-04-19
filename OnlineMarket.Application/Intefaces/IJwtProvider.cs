@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace OnlineMarket.Application.Intefaces
 {
-    public interface IUserRepository : IGenericRepostiry<User>
+    public interface IJwtProvider
     {
-      Task<User> GetByEmail(string email, CancellationToken cancellationToken);
+        string GenerateToken(User user);
     }
 }

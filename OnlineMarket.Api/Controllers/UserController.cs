@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMarket.Application.DTOs.UserDto;
@@ -37,7 +38,7 @@ namespace OnlineMarket.Api.Controllers
             return Ok(user);
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAll()
         {

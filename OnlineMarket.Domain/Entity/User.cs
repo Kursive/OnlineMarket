@@ -1,14 +1,16 @@
-﻿using System;
+﻿using OnlineMarket.Domain.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OnlineMarket.Domain.Enums;
 
 namespace OnlineMarket.Domain.Entity
 {
    public class User
     {
+        public Role Role { get; private set; }
         public Guid Id { get; init; }
         public string Name { get; private set; }=string.Empty;
         private string _email;
@@ -23,7 +25,8 @@ namespace OnlineMarket.Domain.Entity
                 _email = value;
             }
         }
-        public string Password { get;private set; } = string.Empty;
+        
+        public string Password { get;private set; }
         public User( string name, string? email, string password)
         {
             
@@ -47,7 +50,7 @@ namespace OnlineMarket.Domain.Entity
         {
             Email = email;
             Name = name;
-            Password = password;
+           Password = password;
         }
     }
 }

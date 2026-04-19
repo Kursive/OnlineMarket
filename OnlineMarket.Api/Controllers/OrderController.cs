@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMarket.Application.DTOs.OrderDTOs;
 using OnlineMarket.Application.Features.Order.Commands.CreateOrder;
@@ -25,16 +26,16 @@ namespace OnlineMarket.Api.Controllers
             _logger = logger;
         }
 
-
+        [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetByid(Guid id)
+        public async Task<ActionResult> GetById(Guid id)
         {
             var order = await _mediatr.Send(new GetOrderByIdQuery(id));
             _logger.LogInformation("Закаказ с таким {id} найден", id);
             return Ok(order);
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<Orders>>> GetAll()
         {
