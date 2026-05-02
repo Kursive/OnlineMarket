@@ -10,7 +10,9 @@ using OnlineMarket.Application.Features.Users.Commands.UpdateUser;
 using OnlineMarket.Application.Features.Users.Queries.GetAllUsers;
 using OnlineMarket.Application.Features.Users.Queries.GetUserById;
 using OnlineMarket.Domain.Entity;
+using OnlineMarket.Domain.Enums;
 using OnlineMarket.Infrastructure.Cache;
+using OnlineMarket.Infrastructure.Implementations.Auth;
 using System.Reflection.Metadata.Ecma335;
 
 namespace OnlineMarket.Api.Controllers
@@ -29,7 +31,7 @@ namespace OnlineMarket.Api.Controllers
             _logger = logger;
             _usersCache = usersCache;
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(Guid id)
         {
@@ -38,7 +40,7 @@ namespace OnlineMarket.Api.Controllers
             return Ok(user);
         }
 
-        [Authorize]
+        [HasPermission(Permissions.Read)]
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAll()
         {
@@ -56,7 +58,7 @@ namespace OnlineMarket.Api.Controllers
             return await _usersCache.GetByAllUsers();
         }
 
-
+        [HasPermission(Permissions.Create)]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] UserCreateDto request)
         {
@@ -65,7 +67,7 @@ namespace OnlineMarket.Api.Controllers
             return Ok(user);
         }
 
-
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
@@ -85,6 +87,7 @@ namespace OnlineMarket.Api.Controllers
               return  NoContent();
             }
             return Ok(user);
-        }
+        }// либо написать отдельный контроллер выдачи роли при регистрации 
+        //либо чтобы первый пользователь получал роль админа 
     }
 }

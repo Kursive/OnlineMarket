@@ -17,6 +17,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<UserCreateDtoValidator>();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApiAuthentification(builder.Configuration);
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+builder.Services.Configure<RolePermissionsOptions>(builder.Configuration.GetSection("RolePermissions"));
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateOrderHandler).Assembly));
 

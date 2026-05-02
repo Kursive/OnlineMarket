@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using OnlineMarket.Application.DTOs.UserDto;
 using OnlineMarket.Application.DTOs.UserDTOs;
+using OnlineMarket.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

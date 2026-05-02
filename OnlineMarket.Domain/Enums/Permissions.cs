@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace OnlineMarket.Domain.Enums
 {
+    [Flags]
     public enum Permissions
     {
-        Read=1,
-        Create=2,
-        Update=3,
-        Delete=4,
+        None = 0,
+        Read = 1,
+        Create = 2,
+        Update = 4,
+        Delete = 8
     }
 }

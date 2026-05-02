@@ -7,6 +7,8 @@ using OnlineMarket.Application.Features.Order.Commands.DeleteOrder;
 using OnlineMarket.Application.Features.Order.Queries.GetAllOrders;
 using OnlineMarket.Application.Features.Order.Queries.GetOrderById;
 using OnlineMarket.Domain.Entity;
+using OnlineMarket.Domain.Enums;
+using OnlineMarket.Infrastructure.Implementations.Auth;
 using System.Threading.Tasks;
 
 
@@ -26,6 +28,7 @@ namespace OnlineMarket.Api.Controllers
             _logger = logger;
         }
 
+        
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(Guid id)
@@ -44,7 +47,7 @@ namespace OnlineMarket.Api.Controllers
             return Ok(orders);
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteOrder(Guid id)
         {
@@ -53,7 +56,7 @@ namespace OnlineMarket.Api.Controllers
             return NoContent();
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] OrderCreateDto request)
         {

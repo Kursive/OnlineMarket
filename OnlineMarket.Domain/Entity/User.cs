@@ -10,10 +10,11 @@ namespace OnlineMarket.Domain.Entity
 {
    public class User
     {
-        public Role Role { get; private set; }
+        public string Role { get; init; } = "User";
         public Guid Id { get; init; }
         public string Name { get; private set; }=string.Empty;
         private string _email;
+
         public Status Status { get; private set; }
         public string Email
         { 

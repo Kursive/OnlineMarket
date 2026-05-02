@@ -1,17 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens.Experimental;
+using OnlineMarket.Application.Features.Authorization;
 using OnlineMarket.Application.Intefaces;
 using OnlineMarket.Infrastructure.Cache;
 using OnlineMarket.Infrastructure.EFcore;
+using OnlineMarket.Infrastructure.Implementations.Auth;
 using OnlineMarket.Infrastructure.Implementations.Service;
 using OnlineMarket.Infrastructure.Options;
 using OnlineMarket.Infrastructure.Repositories;
 using System.Net;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens.Experimental;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 namespace OnlineMarket.Infrastructure.Extension
@@ -26,9 +29,9 @@ namespace OnlineMarket.Infrastructure.Extension
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<UsersCache>();
-
-
             services.AddScoped<IJwtProvider, JwtProvider>();
+            services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+           services.AddScoped<IAuthorizationHandler, PermissionsHandler>();
 
             return services;
         }
